@@ -69,7 +69,7 @@ input.signup
    color:#FF0000;
    width:200px;
    height:200px;
-   background-image:url(1972445_300163166798324_389128453_n.jpg);
+   background-image:url();
    border-style:dotted;
    border-color:#66FF66;
    cursor:pointer;
