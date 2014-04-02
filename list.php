@@ -3,7 +3,7 @@ session_save_path("/amd/cs/101/0116019/session/");
 session_start();
 if($_SESSION['admin'] == '1'){
 	require_once('connect.php');
-	$sql = "SELECT id,flight_number,departure,destination,departure_date,arrival_date FROM `flight`";
+	$sql = "SELECT id,flight_number,departure,destination,departure_date,arrival_date FROM `flight` ORDER BY  `flight_number` ASC"; 
 	$sth = $db->prepare($sql);
 	$sth->execute();
 ?>
@@ -17,7 +17,7 @@ if($_SESSION['admin'] == '1'){
 		<center>
 		<p>
 		<a href="logout.php">Logout</a>
-		</p>
+		</p>    
 		<h1 class='title'>Listing planes</h1>
 		<table border=2>
 		<tr>
@@ -49,6 +49,9 @@ if($_SESSION['admin'] == '1'){
 		</table>
 		<p>
 		<a href="newfly.php">New Plane</a>
+		</p>
+		<p>
+		<a href="airport.php">Airport Management</a>
 		</p>
 		</center>
 	</body>
