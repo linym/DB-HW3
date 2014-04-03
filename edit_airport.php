@@ -53,7 +53,7 @@ font-family:Verdana, Geneva, sans-serif;
 a {
 	color: white;
 }
- input {
+ input, select {
  background: rgba(100%,100%,100%,0.4);
 
  }

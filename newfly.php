@@ -14,10 +14,35 @@ if($_SESSION['admin'] == '1'){
 		<h1 class='title'>Add Flight</h1>
 		<form action="newfly_db.php" method="POST">
 			<br><br><br><br><br>Flight number:<br><input type="text" name="flight_number" placeholder="Flight number"><br>
-			Departure:<br><input type="text" name="departure" placeholder="from"><br>
-			destination:<br><input type="text" name="destination" placeholder="to"><br>
+			Departure:<br>
+			<?php
+			require_once('connect.php');
+			$sqll = "SELECT `id`,`location` FROM `airport`";
+			$sthh = $db->prepare($sqll);
+			$sthh->execute();
+			echo"<td><select name=\"departure\">";
+			while ( $resultt = $sthh->fetchObject() ) {
+				echo "<Option value=\"{$resultt->location}\">{$resultt->location}</Option>";
+			}
+			echo"</select></td>"; ?><br>
+			destination:<br><?php
+			$sqll = "SELECT `id`,`location` FROM `airport`";
+			$sthh = $db->prepare($sqll);
+			$sthh->execute();
+			echo"<td><select name=\"destination\">";
+			while ( $resultt = $sthh->fetchObject() ) {
+				echo "<Option value=\"{$resultt->location}\">{$resultt->location}</Option>";
+			}
+			echo"</select></td>"; ?><br>			
+			
+			
+			
+			
+			<!--<input type="text" name="departure" placeholder="from"><br>
+			destination:<br><input type="text" name="destination" placeholder="to"><br>-->
 			Departure Date:<br><input type="datetime-local" name="departure_date" value="<?php echo date('Y-m-d').'T'.date('H:i'); ?>"><br>
-			Arrival Date:<br><input type="datetime-local" name="arrival_date"value="<?php echo date('Y-m-d').'T'.date('H:i'); ?>">
+			Arrival Date:<br><input type="datetime-local" name="arrival_date"value="<?php echo date('Y-m-d').'T'.date('H:i'); ?>"><br>
+			Price:<br><input type="text" name="price" placeholder="Price"><br>
 		<br>	<br>
 		<button type="submit" class='edit'>create plane</button>
 		</form>
@@ -46,7 +71,7 @@ font-family:Verdana, Geneva, sans-serif;
 a {
 	color: white;
 }
- input {
+ input, select {
  background: rgba(100%,100%,100%,0.4);
  }
  

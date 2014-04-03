@@ -20,9 +20,9 @@
 	$pos14 = strpos($_POST["destination"],'"' );
 	$pos15 = strpos($_POST["destination"],'\'' );	
 	if($_POST["flight_number"] != "" && $_POST["departure"] != "" && $_POST["destination"] != "" && $pos1 === false && $pos2 === false && $pos3 === false && $pos4 === false&& $pos5 === false&& $pos6 === false&& $pos7 === false&&$pos8=== false&&$pos9 === false&&$pos10 === false&&$pos11 === false&&$pos12 === false&&$pos13 === false&&$pos14 === false&&$pos15 === false&& $_POST["departure_date"]!==""&& $_POST["arrival_date"]!==""){
-		 $sql="UPDATE `flight` SET `flight_number` = ? , `departure` = ? ,`destination`= ?,`departure_date` =  ?,`arrival_date` =  ?  WHERE `id` = ?";
+		 $sql="UPDATE `flight` SET `flight_number` = ? , `departure` = ? ,`destination`= ?,`departure_date` =  ?,`arrival_date` =  ?,`price` = ?  WHERE `id` = ?";
 		$sth = $db->prepare($sql);
-		$sth->execute(array($_POST["flight_number"],$_POST["departure"],$_POST["destination"],$_POST['departure_date'],$_POST['arrival_date'],$_POST["id"]));
+		$sth->execute(array($_POST["flight_number"],$_POST["departure"],$_POST["destination"],$_POST['departure_date'],$_POST['arrival_date'],$_POST['price'],$_POST["id"]));
 		header("Refresh: 0; url=list.php");
 	}
 	else{

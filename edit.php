@@ -13,7 +13,7 @@ if($_SESSION['admin'] == '1'){
 	<center>
 		<?php
 		require_once('connect.php');
-		$sql = "SELECT `id`,`flight_number`,`departure`, `destination`, `departure_date`, `arrival_date` FROM `flight`" . " WHERE `id` = ?";
+		$sql = "SELECT `id`,`flight_number`,`departure`, `destination`, `departure_date`, `arrival_date`,`price` FROM `flight`" . " WHERE `id` = ?";
 		$sth = $db->prepare($sql);
 		$sth->execute(array($_GET["id"]));
 		$result = $sth->fetchObject();
@@ -24,11 +24,35 @@ if($_SESSION['admin'] == '1'){
 		<form action="edit_db.php" method="POST">
 			<br><br><br><br><br><input type="hidden" name="id"  value="<?=$result->id?>"><br>
 			Flight number:<br><input type="text" name="flight_number" placeholder="Flight number" value="<?=$result->flight_number?>"><br>
-			Departure:<br><input type="text" name="departure" placeholder="from" value="<?=$result->departure?>"><br>
-			destination:<br><input type="text" name="destination" placeholder="to" value="<?=$result->destination?>"><br>
+			Departure:<br>
+			<?php
+			require_once('connect.php');
+			$sqll = "SELECT `id`,`location` FROM `airport`";
+			$sthh = $db->prepare($sqll);
+			$sthh->execute();
+			echo"<td><select name=\"departure\">";
+			while ( $resultt = $sthh->fetchObject() ) {
+				if($result->departure == $resultt->location)
+				echo "<Option value=\"{$resultt->location}\" selected>{$resultt->location}</Option>";
+				else
+				echo "<Option value=\"{$resultt->location}\" >{$resultt->location}</Option>";
+			}
+			echo"</select></td>"; ?><br>
+			destination:<br><?php
+			$sqll = "SELECT `id`,`location` FROM `airport`";
+			$sthh = $db->prepare($sqll);
+			$sthh->execute();
+			echo"<td><select name=\"destination\">";
+			while ( $resultt = $sthh->fetchObject() ) {
+				if($result->destination == $resultt->location)
+				echo "<Option value=\"{$resultt->location}\" selected>{$resultt->location}</Option>";
+				else
+				echo "<Option value=\"{$resultt->location}\" >{$resultt->location}</Option>";
+			}
+			echo"</select></td>"; ?><br>			
 			Departure Date:<br><input type="datetime-local" name="departure_date" value="<?=strtr($result->departure_date," ","T")?>"><br>
 			Arrival Date:<br><input type="datetime-local" name="arrival_date" value="<?=strtr($result->arrival_date," ","T")?>"><br>
-			 
+			Price:<br><input type="text" name="price" placeholder="Price" value="<?=$result->price?>"><br>
 		<br>	<br>
 		<button type="submit" class='edit'>Edit plane</button>
 		</form>
@@ -55,7 +79,7 @@ font-family:Verdana, Geneva, sans-serif;
 a {
 	color: white;
 }
- input {
+ input, select {
  background: rgba(100%,100%,100%,0.4);
 
  }

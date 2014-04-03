@@ -17,6 +17,7 @@ if($result->password){
 	$hash = crypt($_POST['password']);
 	$sth->execute(array($_POST["email"],$hash,$_POST["admin"]));
 
+	/*
 	$sqll ="CREATE TABLE  `{$_POST['email']}` (
 `id` INT( 10 ) UNSIGNED NOT NULL ,
 `flight_number` VARCHAR( 255 ) NOT NULL ,
@@ -36,7 +37,7 @@ ALTER TABLE  `{$_POST['email']}` ADD FOREIGN KEY (  `id` ) REFERENCES  `flight` 
 
 
 ";
-	$db->exec($sqll);	
+	$db->exec($sqll);	*/
 
 	
 	header("Refresh: 3; url=signin.php");?>
